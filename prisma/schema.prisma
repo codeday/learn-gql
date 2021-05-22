@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model completed_lessons {
+  id        Int     @id @default(autoincrement())
+  AccountId String? @db.Text
+  LessonId  String? @db.Text
+}
+
+model completed_projects {
+  id        Int     @id @default(autoincrement())
+  AccountId String? @db.Text
+  ProjectId String? @db.Text
+}
+
+model points {
+  id        Int     @id @default(autoincrement())
+  AccountId String? @db.Text
+  Points    Int?    @default(0)
+}

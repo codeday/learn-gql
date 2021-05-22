@@ -1,0 +1,26 @@
+{
+  "name": "learn-gql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codeday/learn-gql.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codeday/learn-gql/issues"
+  },
+  "homepage": "https://github.com/codeday/learn-gql#readme",
+  "devDependencies": {
+    "prisma": "^2.23.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^2.23.0"
+  }
+}
