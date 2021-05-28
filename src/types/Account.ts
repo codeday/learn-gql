@@ -28,7 +28,7 @@ export class Account {
 
   @Field(() => [CompletedLesson], { name: 'completedLessons' })
   async fetchLessons(): Promise<CompletedLesson[]> {
-    if (this.projects) return this.projects;
+    if (this.lessons) return this.lessons;
     return Container.get(PrismaClient).completed_lessons.findMany({ where: { students: { some: { id: this.accountId } } } });
   }
 }
