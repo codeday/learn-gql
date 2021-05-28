@@ -32,7 +32,7 @@ export class StudentResolver {
     return <Promise<Account>><unknown> this.prisma.points.findFirst({ where: { AccountId } });
   }
 
-  @Authorized()
+  //@Authorized()
   @Mutation(() => CompletedLesson)
   async addCompletedLesson(
     @Arg('data', () => addCompletedLessonInput) data: AddCompletedLessonInput,
@@ -40,5 +40,12 @@ export class StudentResolver {
     return this.prisma.completed_lessons.create({ data: addCompletedLessonInput });
   }
 
+  //@Authorized()
+  @Mutation(() => CompletedProject)
+  async addCompletedProject(
+    @Arg('data', () => addCompletedProjectInput) data: AddCompletedProjectInput,
+  ): Promise<CompletedLesson> {
+    return this.prisma.completed_projects.create({ data: addCompletedProjectInput });
+  }
 
 }
