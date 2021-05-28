@@ -1,5 +1,3 @@
-import { CompletedProject } from './../types/CompletedProject';
-import { CompletedLesson } from './../types/CompletedLesson';
 import {
   Resolver, Authorized, Query, Mutation, Arg, Ctx,
 } from 'type-graphql';
@@ -7,7 +5,7 @@ import { PrismaClient, Prisma } from '@prisma/client';
 import { Inject, Service } from 'typedi';
 import { Context, AuthRole } from '../context';
 import { Account, CompletedProject, CompletedLesson } from '../types';
-import { AddCompletedLessonInput, AddCompletedProjectInput } from '../inputs';
+import { AddCompletedLessonInput, AddCompletedProjectInput, EditPointsInput } from '../inputs';
 
 @Service()
 @Resolver(Account)
@@ -51,4 +49,12 @@ export class AccountResolver {
     return this.prisma.completed_projects.create({ data: addCompletedProjectInput });
   }
 
+  // TODO: add check to see if they are in points db, if they are, edit row, if not create.
+  //@Authorized()
+  @Mutation(() => Account)
+  async editPoints(
+    @Arg('data') editPointsInput: EditPointsInput,
+  ): Promise<Prisma.points> {
+    return this.prisma.points.create({ data: editPointsInput });
+  }
 }
