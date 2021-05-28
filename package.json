@@ -5,7 +5,12 @@
   "author": "Jacob Cuomo <jacobc@codeday.org>",
   "license": "Artistic-2.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist",
+     "clean": "rm -rf dist",
+     "build": "npm -s run clean && npm -s run prisma && npx tsc && cpy '**/*' '!**/*.ts' ../dist/ --cwd=src/ --no-overwrite --parents",
+     "prisma": "prisma format && prisma generate",
+     "dev": "ts-node-dev --no-notify --respawn --transpile-only src",
+     "debug": "ts-node-dev --no-notify --respawn src"
   },
   "dependencies": {
     "@codeday/uploader-node": "^1.0.1",
