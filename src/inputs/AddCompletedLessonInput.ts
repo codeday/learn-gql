@@ -2,7 +2,7 @@ import { InputType, Field, Int } from 'type-graphql'
 import { Prisma } from '@prisma/client'
 
 @InputType()
-class AddCompletedLessonInput {
+export class AddCompletedLessonInput {
   @Field(() => String, { nullable: true })
   AccountId?: string
 

@@ -5,6 +5,7 @@ import { PrismaClient } from '@prisma/client';
 import { Inject, Service } from 'typedi';
 import { Context, AuthRole } from '../context';
 import { Account } from '../types';
+import { AddCompletedLessonInput, AddCompletedProjectInput } from '../inputs';
 
 @Service()
 @Resolver(Account)
