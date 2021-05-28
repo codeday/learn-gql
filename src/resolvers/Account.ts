@@ -1,15 +1,17 @@
+import { CompletedProject } from './../types/CompletedProject';
+import { CompletedLesson } from './../types/CompletedLesson';
 import {
   Resolver, Authorized, Query, Mutation, Arg, Ctx,
 } from 'type-graphql';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import { Inject, Service } from 'typedi';
 import { Context, AuthRole } from '../context';
-import { Account } from '../types';
+import { Account, CompletedProject, CompletedLesson } from '../types';
 import { AddCompletedLessonInput, AddCompletedProjectInput } from '../inputs';
 
 @Service()
 @Resolver(Account)
-export class StudentResolver {
+export class AccountResolver {
   @Inject(() => PrismaClient)
   private readonly prisma : PrismaClient;
 
@@ -36,16 +38,16 @@ export class StudentResolver {
   //@Authorized()
   @Mutation(() => CompletedLesson)
   async addCompletedLesson(
-    @Arg('data', () => addCompletedLessonInput) data: AddCompletedLessonInput,
-  ): Promise<CompletedLesson> {
+    @Arg('data') addCompletedLessonInput: AddCompletedLessonInput,
+  ): Promise<Prisma.completed_lessons> {
     return this.prisma.completed_lessons.create({ data: addCompletedLessonInput });
   }
 
   //@Authorized()
   @Mutation(() => CompletedProject)
   async addCompletedProject(
-    @Arg('data', () => addCompletedProjectInput) data: AddCompletedProjectInput,
-  ): Promise<CompletedLesson> {
+    @Arg('data') addCompletedProjectInput: AddCompletedProjectInput,
+  ): Promise<Prisma.completed_projects> {
     return this.prisma.completed_projects.create({ data: addCompletedProjectInput });
   }
 
