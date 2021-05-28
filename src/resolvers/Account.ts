@@ -12,6 +12,7 @@ export class StudentResolver {
   @Inject(() => PrismaClient)
   private readonly prisma : PrismaClient;
 
+
   @Query(() => [Account])
   async accounts(
     @Arg('skip', { nullable: true }) skip?: number,
@@ -23,4 +24,12 @@ export class StudentResolver {
       orderBy: { createdAt: 'desc' },
     });
   }
+
+  @Query(() => Account)
+  async account(
+    @Arg('AccountId', {nullable: false}) AccountId?: string,
+  ): Promise<Account> {
+    return <Promise<Account>><unknown> this.prisma.points.findFirst({ where: { AccountId } });
+  }
+
 }
