@@ -1,11 +1,11 @@
+import {
+  ObjectType, Field, Int,
+} from 'type-graphql';
+import { Container } from 'typedi';
 import { PrismaClient } from '@prisma/client';
 import { CompletedLesson } from './CompletedLesson';
 import { CompletedProject } from './CompletedProject';
-import {
-  ObjectType, Field, Authorized, Int,
-} from 'type-graphql';
-import { Container } from 'typedi';
-import { AuthRole } from '../context';
+
 @ObjectType()
 export class Account {
   // Metadata
@@ -13,24 +13,24 @@ export class Account {
   id: number
 
   @Field(() => String)
-  accountId: string
+  AccountId: string
 
   @Field(() => Int)
-  points: number
+  Points: number
 
-  projects?: CompletedProject[] | null
+  CompletedProjects?: CompletedProject[] | null
 
-  @Field(() => [CompletedProject], { name: 'completedProjects' })
+  @Field(() => [CompletedProject], { name: 'CompletedProjects' })
   async fetchProjects(): Promise<CompletedProject[]> {
     if (this.projects) return this.projects;
-    return Container.get(PrismaClient).completed_projects.findMany({ where: { completedProjects: { some: { id: this.accountId } } } });
+    return Container.get(PrismaClient).completed_projects.findMany({ where: { AccountId: this.AccountId } });
   }
 
-  lessons?: CompletedLesson[] | null
+  CompletedLessons?: CompletedLesson[] | null
 
-  @Field(() => [CompletedLesson], { name: 'completedLessons' })
+  @Field(() => [CompletedLesson], { name: 'CompletedLessons' })
   async fetchLessons(): Promise<CompletedLesson[]> {
-    if (this.lessons) return this.lessons;
-    return Container.get(PrismaClient).completed_lessons.findMany({ where: { students: { some: { id: this.accountId } } } });
+    if (this.CompletedLessons) return this.CompletedLessons;
+    return Container.get(PrismaClient).completed_lessons.findMany({ where: { AccountId: this.AccountId } });
   }
 }
