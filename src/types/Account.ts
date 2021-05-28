@@ -1,9 +1,11 @@
+import { PrismaClient } from '@prisma/client';
+import { CompletedLesson } from './CompletedLesson';
+import { CompletedProject } from './CompletedProject';
 import {
   ObjectType, Field, Authorized, Int,
 } from 'type-graphql';
 import { Container } from 'typedi';
 import { AuthRole } from '../context';
-
 @ObjectType()
 export class Account {
   // Metadata
