@@ -24,15 +24,7 @@ export class StudentResolver {
     });
   }
 
-  @Authorized(AuthRole.ADMIN, AuthRole.STUDENT)
-  @StudentOnlySelf('where')
-  @Query(() => Account, { nullable: true })
-  async account(
-    @Ctx() { auth }: Context,
-    @Arg('where', () => IdOrUsernameInput, { nullable: true }) where?: IdOrUsernameInput,
-  ): Promise<Account | null> {
-    return this.prisma.student.findUnique({ where: where?.toQuery() || auth.toWhere() });
-  }
+  
 
   @Authorized(AuthRole.ADMIN)
   @Mutation(() => Student)

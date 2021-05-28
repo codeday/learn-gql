@@ -13,18 +13,18 @@ export class Account {
   @Field(() => Int)
   points: number
 
-  projects?: PrismaProject[] | null
+  projects?: CompletedProject[] | null
 
-  @Field(() => [Project], { name: 'completedProjects' })
-  async fetchProjects(): Promise<PrismaProject[]> {
+  @Field(() => [CompletedProject], { name: 'completedProjects' })
+  async fetchProjects(): Promise<CompletedProject[]> {
     if (this.projects) return this.projects;
     return Container.get(PrismaClient).completed_projects.findMany({ where: { completedProjects: { some: { id: this.id } } } });
   }
 
-  lessons?: PrismaLesson[] | null
+  lessons?: CompletedLesson[] | null
 
-  @Field(() => [Lesson], { name: 'completedLessons' })
-  async fetchLessons(): Promise<PrismaProject[]> {
+  @Field(() => [CompletedLesson], { name: 'completedLessons' })
+  async fetchLessons(): Promise<CompletedLesson[]> {
     if (this.projects) return this.projects;
     return Container.get(PrismaClient).completed_lessons.findMany({ where: { students: { some: { id: this.id } } } });
   }
