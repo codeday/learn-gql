@@ -2,7 +2,7 @@ import {
   ObjectType, Field, Int,
 } from 'type-graphql';
 import { Container } from 'typedi';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import { CompletedLesson } from './CompletedLesson';
 import { CompletedProject } from './CompletedProject';
 
@@ -21,7 +21,7 @@ export class Account {
   CompletedProjects?: CompletedProject[] | null
 
   @Field(() => [CompletedProject], { name: 'CompletedProjects' })
-  async fetchProjects(): Promise<CompletedProject[]> {
+  async fetchProjects(): Promise<Prisma.completed_projects[]> {
     if (this.CompletedProjects) return this.CompletedProjects;
     return Container.get(PrismaClient).completed_projects.findMany({ where: { AccountId: this.AccountId } });
   }
@@ -29,7 +29,7 @@ export class Account {
   CompletedLessons?: CompletedLesson[] | null
 
   @Field(() => [CompletedLesson], { name: 'CompletedLessons' })
-  async fetchLessons(): Promise<CompletedLesson[]> {
+  async fetchLessons(): Promise<Prisma.completed_lessons[]> {
     if (this.CompletedLessons) return this.CompletedLessons;
     return Container.get(PrismaClient).completed_lessons.findMany({ where: { AccountId: this.AccountId } });
   }
