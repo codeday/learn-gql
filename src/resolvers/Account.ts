@@ -32,4 +32,13 @@ export class StudentResolver {
     return <Promise<Account>><unknown> this.prisma.points.findFirst({ where: { AccountId } });
   }
 
+  @Authorized()
+  @Mutation(() => CompletedLesson)
+  async addCompletedLesson(
+    @Arg('data', () => addCompletedLessonInput) data: AddCompletedLessonInput,
+  ): Promise<CompletedLesson> {
+    return this.prisma.completed_lessons.create({ data: addCompletedLessonInput });
+  }
+
+
 }
