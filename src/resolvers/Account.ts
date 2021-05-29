@@ -5,7 +5,8 @@ import { PrismaClient, Prisma } from '@prisma/client';
 import { Inject, Service } from 'typedi';
 import { Context, AuthRole } from '../context';
 import { Account, CompletedProject, CompletedLesson } from '../types';
-import { AddCompletedLessonInput, AddCompletedProjectInput, EditPointsInput } from '../inputs';
+import { AddCompletedLessonInput, AddCompletedProjectInput,
+  EditPointsInput, AddUserToPointsInput } from '../inputs';
 
 @Service()
 @Resolver(Account)
@@ -49,12 +50,24 @@ export class AccountResolver {
     return this.prisma.completed_projects.create({ data: addCompletedProjectInput });
   }
 
-  // TODO: add check to see if they are in points db, if they are, edit row, if not create.
   //@Authorized()
+  @Mutation(() => CompletedProject)
+  async addUserToPoints(
+    @Arg('data') addUserToPointsInput: AddUserToPointsInput,
+  ): Promise<Prisma.points> {
+    return this.prisma.completed_projects.create({ data: addUserToPointsInput });
+  }
+
+  // TODO: add check to see if they are in points db, if they are, edit row, if not create.
+  // @Authorized()
   @Mutation(() => Account)
   async editPoints(
     @Arg('data') editPointsInput: EditPointsInput,
+    @Arg('AccountId', { nullable: false }) AccountId?: string,
   ): Promise<Prisma.points> {
-    return this.prisma.points.create({ data: editPointsInput });
+    return this.prisma.points.update({
+      where: { AccountId },
+      data: editPointsInput,
+    });
   }
 }
