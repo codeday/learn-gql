@@ -9,8 +9,8 @@ export class CompletedProject {
   id: number
 
   @Field(() => String)
-  accountId: string
+  AccountId: string
 
   @Field(() => String)
-  projectId: string
+  ProjectId: string
 }

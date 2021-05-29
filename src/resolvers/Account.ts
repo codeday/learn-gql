@@ -23,7 +23,6 @@ export class AccountResolver {
     return <Promise<Account[]>><unknown> this.prisma.points.findMany({
       skip,
       take: take || 25,
-      orderBy: { createdAt: 'desc' },
     });
   }
 
@@ -51,19 +50,19 @@ export class AccountResolver {
   }
 
   //@Authorized(AuthRole.ADMIN)
-  @Mutation(() => CompletedProject)
+  @Mutation(() => Account)
   async addUserToPoints(
     @Arg('data') addUserToPointsInput: AddUserToPointsInput,
   ): Promise<Prisma.points> {
-    return this.prisma.completed_projects.create({ data: addUserToPointsInput });
+    return this.prisma.points.create({ data: addUserToPointsInput });
   }
 
   // TODO: add check to see if they are in points db, if they are, edit row, if not create.
   //@Authorized(AuthRole.ADMIN)
   @Mutation(() => Account)
   async editPoints(
+    @Arg('AccountId', { nullable: true }) AccountId?: string,
     @Arg('data') editPointsInput: EditPointsInput,
-    @Arg('AccountId', { nullable: false }) AccountId?: string,
   ): Promise<Prisma.points> {
     return this.prisma.points.update({
       where: { AccountId },

@@ -9,8 +9,8 @@ export class CompletedLesson {
   id: number
 
   @Field(() => String)
-  accountId: string
+  AccountId: string
 
   @Field(() => String)
-  lessonId: string
+  LessonId: string
 }
