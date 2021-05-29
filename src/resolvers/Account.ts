@@ -34,7 +34,7 @@ export class AccountResolver {
     return <Promise<Account>><unknown> this.prisma.points.findFirst({ where: { AccountId } });
   }
 
-  //@Authorized()
+  //@Authorized(AuthRole.ADMIN)
   @Mutation(() => CompletedLesson)
   async addCompletedLesson(
     @Arg('data') addCompletedLessonInput: AddCompletedLessonInput,
@@ -42,7 +42,7 @@ export class AccountResolver {
     return this.prisma.completed_lessons.create({ data: addCompletedLessonInput });
   }
 
-  //@Authorized()
+  //@Authorized(AuthRole.ADMIN)
   @Mutation(() => CompletedProject)
   async addCompletedProject(
     @Arg('data') addCompletedProjectInput: AddCompletedProjectInput,
@@ -50,7 +50,7 @@ export class AccountResolver {
     return this.prisma.completed_projects.create({ data: addCompletedProjectInput });
   }
 
-  //@Authorized()
+  //@Authorized(AuthRole.ADMIN)
   @Mutation(() => CompletedProject)
   async addUserToPoints(
     @Arg('data') addUserToPointsInput: AddUserToPointsInput,
@@ -59,7 +59,7 @@ export class AccountResolver {
   }
 
   // TODO: add check to see if they are in points db, if they are, edit row, if not create.
-  // @Authorized()
+  //@Authorized(AuthRole.ADMIN)
   @Mutation(() => Account)
   async editPoints(
     @Arg('data') editPointsInput: EditPointsInput,

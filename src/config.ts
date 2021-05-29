@@ -3,15 +3,15 @@ import { config as loadEnv } from 'dotenv';
 
 loadEnv();
 
+[
+  'DATABASE_URL',
+].forEach((req) => { if (!process.env[req]) throw Error(`The ${req} environment variable is required.`); });
+
 const config = {
   debug: process.env.NODE_ENV !== 'production',
-  discord: {
-    botToken: process.env.DISCORD_BOT_TOKEN,
-    channel: process.env.DISCORD_CHANNEL,
-    approverRole: process.env.DISCORD_APPROVER_ROLE,
-  },
-  uploader: {
-    base: process.env.UPLOADER_BASE,
+  auth: {
+    secret: process.env.AUTH_SECRET!,
+    audience: process.env.AUTH_AUDIENCE!,
   },
 };
 

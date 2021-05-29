@@ -6,11 +6,11 @@
   "license": "Artistic-2.0",
   "scripts": {
     "start": "node dist",
-     "clean": "rm -rf dist",
-     "build": "npm -s run clean && npm -s run prisma && npx tsc && cpy '**/*' '!**/*.ts' ../dist/ --cwd=src/ --no-overwrite --parents",
-     "prisma": "prisma format && prisma generate",
-     "dev": "ts-node-dev --no-notify --respawn --transpile-only src",
-     "debug": "ts-node-dev --no-notify --respawn src"
+    "clean": "rm -rf dist",
+    "build": "npm -s run clean && npm -s run prisma && npx tsc && cpy '**/*' '!**/*.ts' ../dist/ --cwd=src/ --no-overwrite --parents",
+    "prisma": "prisma format && prisma generate",
+    "dev": "ts-node-dev --no-notify --respawn --transpile-only src",
+    "debug": "ts-node-dev --no-notify --respawn src"
   },
   "dependencies": {
     "@codeday/uploader-node": "^1.0.1",
@@ -21,6 +21,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^15.3.0",
+    "jsonwebtoken": "^8.5.1",
     "node-fetch": "^2.6.0",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.0.0-rc.3",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@codeday/eslint-typescript-config": "^2.1.5",
+    "@types/jsonwebtoken": "^8.5.1",
     "@types/node": "^15.6.1",
     "@types/node-fetch": "^2.5.10",
     "eslint": "^6.8.0",
