@@ -61,7 +61,7 @@ export class AccountResolver {
   //@Authorized(AuthRole.ADMIN)
   @Mutation(() => Account)
   async editPoints(
-    @Arg('AccountId', { nullable: true }) AccountId?: string,
+    @Arg('AccountId') AccountId: string,
     @Arg('data') editPointsInput: EditPointsInput,
   ): Promise<Prisma.points> {
     return this.prisma.points.update({
