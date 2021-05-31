@@ -4,5 +4,5 @@ import { Prisma } from '@prisma/client'
 @InputType()
 export class EditPointsInput {
   @Field(() => Int, { nullable: true })
-  Points?: number
+  points?: number
 }

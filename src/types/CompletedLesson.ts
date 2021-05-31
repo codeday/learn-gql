@@ -7,10 +7,11 @@ export class CompletedLesson {
   // Metadata
   @Field(() => Int)
   id: number
+  
+  @Field(() => String)
+  lessonId: string
 
   @Field(() => String)
-  AccountId: string
+  accountId: string
 
-  @Field(() => String)
-  LessonId: string
 }

@@ -2,10 +2,10 @@ import { InputType, Field, Int } from 'type-graphql'
 import { Prisma } from '@prisma/client'
 
 @InputType()
-export class AddCompletedProjectInput {
+export class AddCompletedTrackInput {
   @Field(() => String, { nullable: true })
-  AccountId?: string
+  accountId?: string
 
   @Field(() => String, { nullable: true })
-  ProjectId?: string
+  trackId?: string
 }

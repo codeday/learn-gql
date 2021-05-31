@@ -7,20 +7,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model completed_lessons {
+model Points {
   id        Int     @id @default(autoincrement())
-  AccountId String? @db.Text
-  LessonId  String? @db.Text
+  points    Int?    @default(0)
+  accountId String? @db.Text
 }
 
-model completed_projects {
+model CompletedLessons {
   id        Int     @id @default(autoincrement())
-  AccountId String? @db.Text
-  ProjectId String? @db.Text
+  lessonId  String? @db.Text
+  accountId String? @db.Text
 }
 
-model points {
+model CompletedTracks {
   id        Int     @id @default(autoincrement())
-  AccountId String? @db.Text
-  Points    Int?    @default(0)
+  trackId   String? @db.Text
+  accountId String? @db.Text
 }

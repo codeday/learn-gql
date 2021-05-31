@@ -4,8 +4,8 @@ import {
 import { PrismaClient, Prisma } from '@prisma/client';
 import { Inject, Service } from 'typedi';
 import { Context, AuthRole } from '../context';
-import { Account, CompletedProject, CompletedLesson } from '../types';
-import { AddCompletedLessonInput, AddCompletedProjectInput,
+import { Account, CompletedTrack, CompletedLesson } from '../types';
+import { AddCompletedLessonInput, AddCompletedTrackInput,
   EditPointsInput, AddUserToPointsInput } from '../inputs';
 
 @Service()
@@ -28,25 +28,25 @@ export class AccountResolver {
 
   @Query(() => Account)
   async account(
-    @Arg('AccountId', {nullable: false}) AccountId?: string,
+    @Arg('accountId', {nullable: false}) accountId?: string,
   ): Promise<Account> {
-    return <Promise<Account>><unknown> this.prisma.points.findFirst({ where: { AccountId } });
+    return <Promise<Account>><unknown> this.prisma.points.findFirst({ where: { accountId } });
   }
 
   //@Authorized(AuthRole.ADMIN)
   @Mutation(() => CompletedLesson)
   async addCompletedLesson(
     @Arg('data') addCompletedLessonInput: AddCompletedLessonInput,
-  ): Promise<Prisma.completed_lessons> {
-    return this.prisma.completed_lessons.create({ data: addCompletedLessonInput });
+  ): Promise<Prisma.completedLessons> {
+    return this.prisma.completedLessons.create({ data: addCompletedLessonInput });
   }
 
   //@Authorized(AuthRole.ADMIN)
-  @Mutation(() => CompletedProject)
-  async addCompletedProject(
-    @Arg('data') addCompletedProjectInput: AddCompletedProjectInput,
-  ): Promise<Prisma.completed_projects> {
-    return this.prisma.completed_projects.create({ data: addCompletedProjectInput });
+  @Mutation(() => CompletedTrack)
+  async addCompletedTrack(
+    @Arg('data') addCompletedTrackInput: AddCompletedTrackInput,
+  ): Promise<Prisma.completedTracks> {
+    return this.prisma.completedTracks.create({ data: addCompletedTrackInput });
   }
 
   //@Authorized(AuthRole.ADMIN)
@@ -61,11 +61,11 @@ export class AccountResolver {
   //@Authorized(AuthRole.ADMIN)
   @Mutation(() => Account)
   async editPoints(
-    @Arg('AccountId') AccountId: string,
+    @Arg('accountId') accountId: string,
     @Arg('data') editPointsInput: EditPointsInput,
   ): Promise<Prisma.points> {
     return this.prisma.points.update({
-      where: { AccountId },
+      where: { accountId },
       data: editPointsInput,
     });
   }

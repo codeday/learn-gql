@@ -1,3 +1,3 @@
 export * from './Account';
-export * from './CompletedProject';
+export * from './CompletedTrack';
 export * from './CompletedLesson';

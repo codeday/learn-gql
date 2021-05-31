@@ -4,8 +4,8 @@ import { Prisma } from '@prisma/client'
 @InputType()
 export class AddCompletedLessonInput {
   @Field(() => String, { nullable: true })
-  AccountId?: string
+  accountId?: string
 
   @Field(() => String, { nullable: true })
-  LessonId?: string
+  lessonId?: string
 }

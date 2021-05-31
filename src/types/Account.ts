@@ -4,7 +4,7 @@ import {
 import { Container } from 'typedi';
 import { PrismaClient, Prisma } from '@prisma/client';
 import { CompletedLesson } from './CompletedLesson';
-import { CompletedProject } from './CompletedProject';
+import { CompletedTrack } from './CompletedTrack';
 
 @ObjectType()
 export class Account {
@@ -13,24 +13,24 @@ export class Account {
   id: number
 
   @Field(() => String)
-  AccountId: string
+  accountId: string
 
   @Field(() => Int)
-  Points: number
+  points: number
 
-  CompletedProjects?: CompletedProject[] | null
+  CompletedTracks?: CompletedTrack[] | null
 
-  @Field(() => [CompletedProject], { name: 'CompletedProjects' })
-  async fetchProjects(): Promise<Prisma.completed_projects[]> {
-    if (this.CompletedProjects) return this.CompletedProjects;
-    return Container.get(PrismaClient).completed_projects.findMany({ where: { AccountId: this.AccountId } });
+  @Field(() => [CompletedTrack], { name: 'CompletedTracks' })
+  async fetchTracks(): Promise<Prisma.CompletedTrack[]> {
+    if (this.CompletedTracks) return this.CompletedTracks;
+    return Container.get(PrismaClient).completedTracks.findMany({ where: { accountId: this.accountId } });
   }
 
   CompletedLessons?: CompletedLesson[] | null
 
   @Field(() => [CompletedLesson], { name: 'CompletedLessons' })
-  async fetchLessons(): Promise<Prisma.completed_lessons[]> {
+  async fetchLessons(): Promise<Prisma.CompletedLesson[]> {
     if (this.CompletedLessons) return this.CompletedLessons;
-    return Container.get(PrismaClient).completed_lessons.findMany({ where: { AccountId: this.AccountId } });
+    return Container.get(PrismaClient).completedLessons.findMany({ where: { accountId: this.accountId } });
   }
 }

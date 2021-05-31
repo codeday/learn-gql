@@ -3,14 +3,15 @@ import {
 } from 'type-graphql';
 
 @ObjectType()
-export class CompletedProject {
+export class CompletedTrack {
   // Metadata
   @Field(() => Int)
   id: number
 
   @Field(() => String)
-  AccountId: string
+  trackId: string
 
   @Field(() => String)
-  ProjectId: string
+  accountId: string
+  
 }
